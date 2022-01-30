@@ -29,4 +29,7 @@ class USmartTexturesNodesBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "SmartTexturesNodes sample test testing"), Category = "SmartTexturesNodesTesting")
 	static float SmartTexturesNodesSampleFunction(float Param);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Texture Size", Keywords = "Get Texture Size"), Category = "Texture Info")
+	static void GetTextureSize(UTexture2D* Texture2D, int32& TextureWidth, int32& TextureHeight);
 };
