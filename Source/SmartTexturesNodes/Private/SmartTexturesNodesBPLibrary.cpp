@@ -57,12 +57,14 @@ void USmartTexturesNodesBPLibrary::GetTexturePixelsAtPoint(UTexture2D* Texture2D
 	TextureWidth = Mip0.SizeX;
 	TextureHeight = Mip0.SizeY;
 
+	//Get Bulk data of the texture 
 	auto Mip0Data = &Mip0.BulkData;
 	if(Mip0Data == nullptr)
 	{
 		return;
 	}
 
+	//Get pixels from the texture and lock the texture in the thread that other things cant access it
 	void* Mip0Pixels_ = Mip0Data->Lock(LOCK_READ_ONLY);
 	FColor* Mip0Pixels = static_cast<FColor*>(Mip0Pixels_);
 	if(Mip0Pixels == nullptr)
@@ -71,13 +73,16 @@ void USmartTexturesNodesBPLibrary::GetTexturePixelsAtPoint(UTexture2D* Texture2D
 		return;
 	}
 
+	//Set output pixel array size
 	int32 TotalPixelsArrayLenght;
 	TotalPixelsArrayLenght = PixelsOnXAxis * PixelsOnYAxis;
 	Pixels.SetNum(TotalPixelsArrayLenght);
 
+	//Main loop for getting correct pixels from the bulk data
 	for(int32 i = 0; i < TotalPixelsArrayLenght; i++)
 	{
-		Pixels[i] = Mip0Pixels[i];
+		int32 PixelToRead = 0;
+		Pixels[i] = Mip0Pixels[PixelToRead];
 	}
 	Mip0Data->Unlock();
 }
