@@ -32,4 +32,7 @@ class USmartTexturesNodesBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Texture Size", Keywords = "Get Texture Size"), Category = "Texture Info")
 	static void GetTextureSize(UTexture2D* Texture2D, int32& TextureWidth, int32& TextureHeight);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Pixels From Texture Point",  Keywords = "Get Pixels From Texture Point"), Category = "Texture Info")
+	static void GetTexturePixelsAtPoint(UTexture2D* Texture2D, int32 StartX, int32 StartY, int32 PixelsOnXAxis, int32 PixelsOnYAxis, TArray<FColor>& Pixels, int32& TextureWidth, int32& TextureHeight);
 };
